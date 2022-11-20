@@ -6,6 +6,7 @@
     const ctx = Canvas.getContext("2d");
     const WIDTH = Canvas.width;
     const HEIGHT = Canvas.height;
+    const numParts = 10;
     let paused = false;
     
     function random(min, max) {
@@ -22,8 +23,11 @@
     }
     
     let parts = [];
-    for (let i=0; i<5; i++)
+    for (let i=0; i<numParts; i++) {
         parts[i] = new Particle(random(0, WIDTH), random(0, HEIGHT), random(1, 10));
+        parts[i].dx = random(-1, 1);
+        parts[i].dy = random(-1, 1);
+    }
 
     function loop() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
