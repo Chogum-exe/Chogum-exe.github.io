@@ -22,11 +22,8 @@
     }
     
     let parts = [];
-    for (let i=0; i<10; i++) {
+    for (let i=0; i<10; i++)
         parts[i] = new Particle(random(0, WIDTH), random(0, HEIGHT), random(1, 10));
-        parts[i].dx = random(-1, 1) * Math.random();
-        parts[i].dy = random(-1, 1) * Math.random();
-    }
 
     function loop() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
