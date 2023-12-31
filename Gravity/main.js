@@ -6,7 +6,7 @@ alert(
     , . moves in in/out direction
     `
 );
-;(() => {
+(() => {
 
     const Canvas = document.getElementById("can");
     Canvas.width = window.innerWidth; Canvas.height = window.innerHeight-5;
