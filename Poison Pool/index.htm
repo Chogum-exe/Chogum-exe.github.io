@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assests/icon.png" type="image/png">
+    <script defer src="./game.js"></script>
+    <audio id="hs">
+        <source src="./assests/hitSound.mp3" type="audio/mp3">
+    </audio>
+    <audio id="bu">
+        <source src="./assests/buffSound.mp3" type="audio/mp3">
+    </audio>
+</head>
+<body style="background-color: black;">
+<center>
+    <title>Poison Pool</title>
+    <noscript>Plz enable javascript --(;-;)v</noscript>
+    <h1 id="bo" style="color: lime;"> 💚 💚 💚 💚 💚 -Poison Pool- 0 </h1>
+    <canvas id="gc" width="800" height="500" style="border: 3px solid lime; display: none;">Get a REAL browser!</canvas>
+    <div id="pr" style="display: block;">
+        <img src="./assests/icon.png" width="250" height="500"></img>
+        <br>
+        <button onclick="setDifficulty('easy')">Easy</button>
+        <button onclick="setDifficulty('medium')">Hard</button>
+        <button onclick="setDifficulty('hard')">Insane</button>
+    </div>
+    <style>
+        button {
+            background-color: lime;
+            border-radius: 12px;
+            border: 1px solid yellow;
+            padding: 10px 10px;
+        }
+    </style>
+</center>
+</body>
+</html>

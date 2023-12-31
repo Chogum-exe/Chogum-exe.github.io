@@ -1,0 +1,8 @@
+
+game.js is the non-compressed file for your sake of viewing the code.
+while gam.min.js is the compressed version for storage.
+if you want to save space you can delete the game.js file
+
+TO OPEN THE GAME, COPY THE FILE PATH OF THE "index.htm" FILE AND PASTE THAT AS A LINK INTO YOUR BROWSER.
+the goal of the game is to survive and in turn get a high score.
+use w, a, s, d or the arrow keys to move the player
