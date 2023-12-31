@@ -1,4 +1,11 @@
-
+alert(
+    `
+    CONTROLS:
+    W S moves in up/down direction
+    A D moves in left/right direction
+    , . moves in in/out direction
+    `
+);
 ;(() => {
 
     const Canvas = document.getElementById("can");
