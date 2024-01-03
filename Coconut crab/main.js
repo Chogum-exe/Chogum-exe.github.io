@@ -1,11 +1,16 @@
+import Game from "./Game.mjs";
+import GameLoop from "./GameLoop.mjs";
+
 "use strict";
-import add from "./util.mjs";
+(() => {
 
-(async () => {
+    const canvas = document.getElementById("game-canvas");
+    const ctx = canvas.getContext("2d");
+    const game = new Game();
 
-    console.log(add(2, 5));
-    await fetch("./test.json").then((res) => {
-        console.log(res.json());
-    })
+    const loop = new GameLoop(1000/30, () => {
+        game.update();
+        game.render(ctx);
+    });
 
 })();
