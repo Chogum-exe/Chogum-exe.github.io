@@ -2,20 +2,29 @@
 function vec2d (x, y) {
     this.x = x;
     this.y = y;
-    this.magnitude = Math.sqrt(x**2, y**2);
 }
 vec2d.prototype = {
     constructor: vec2d,
+    getMagnitude: function () {
+        return Math.sqrt(this.x**2 + this.y**2);
+    },
     toUnitVec: function () {
-        return new vec2d(this.x/this.magnitude, this.y/this.magnitude);
+        let mag = this.getMagnitude();
+        return new vec2d(this.x/mag, this.y/mag);
     },
     add: function(vec) {
+        if (! vec instanceof vec2d)
+            throw new Error("parameter is not a vector 2d");
         return new vec2d(this.x+vec.x, this.y+vec.y);
     },
     sub: function(vec) {
+        if (! vec instanceof vec2d)
+            throw new Error("parameter is not a vector 2d");
         return new vec2d(this.x-vec.x, this.y-vec.y);
     },
     scale: function(u) {
+        if (typeof u != "number")   
+            throw new Error("parameter is not a scalar number");
         return new vec2d(this.x*u, this.y*u);
     }
 }
