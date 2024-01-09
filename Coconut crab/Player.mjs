@@ -1,12 +1,12 @@
 import vec2d from "./vec2d.mjs";
 
-function Crab (x, y) {
+function Player (x, y) {
     this.position = new vec2d(x, y);
     this.velocity = new vec2d(0, 0);
     this.speed = 10;
 }
-Crab.prototype = {
-    constructor: Crab,
+Player.prototype = {
+    constructor: Player,
     update: function (keys) {
         this.velocity = this.velocity.scale(0.9);
 
@@ -20,8 +20,9 @@ Crab.prototype = {
 
         let magnitude = this.velocity.getMagnitude();
         if (magnitude > this.speed)
-            this.velocity = this.velocity.toUnitVec().scale(magnitude);
+            this.velocity = this.velocity.toUnitVec().scale(this.speed);
 
+        this.position = this.position.add(this.velocity);        
     },
     draw: function (ctx) {
         ctx.fillStyle = "black";
@@ -29,4 +30,4 @@ Crab.prototype = {
     }
 }
 
-export default Crab;
+export default Player;

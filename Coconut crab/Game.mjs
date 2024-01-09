@@ -1,7 +1,7 @@
-import Crab from "./Crab.mjs";
+import Player from "./Player.mjs";
 
 function Game () {
-    this.player = new Crab(0, 0);
+    this.player = new Player(0, 0);
 }
 Game.prototype = {
     constructor: Game,

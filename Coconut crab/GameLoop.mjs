@@ -9,8 +9,7 @@ function GameLoop (frame_time, callback) {
 GameLoop.prototype = {
     constructor: GameLoop,
     start: function () {
-        this.run = this.run.bind(this);
-        this.frame_req = requestAnimationFrame(this.run);
+        this.frame_req = requestAnimationFrame(this.run.bind(this));
     },
     run: function (current_stamp) {
 
@@ -23,7 +22,7 @@ GameLoop.prototype = {
             this.accumulated_time -= this.frame_time;
         }
 
-        this.frame_req = requestAnimationFrame(this.run);
+        this.frame_req = requestAnimationFrame(this.run.bind(this));
     },
     stop: function () {
         cancelAnimationFrame(this.frame_req);

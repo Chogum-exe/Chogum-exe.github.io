@@ -3,12 +3,21 @@ import GameLoop from "./GameLoop.mjs";
 import Controller from "./Controller.mjs";
 
 "use strict";
-(() => {
+window.onload = () => {
+
 
     const canvas = document.getElementById("game-canvas");
     const ctx = canvas.getContext("2d");
     const game = new Game();
-    const control = new Controller(canvas);
+    const control = new Controller(document);
+
+    //Resizing window code
+    const handleResize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    handleResize();
+    window.onresize = handleResize;
 
     const loop = new GameLoop(1000/30, () => {
         game.update(control.keydown);
@@ -18,9 +27,4 @@ import Controller from "./Controller.mjs";
     });
     loop.start();
 
-    window.onresize = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-})();
+};
