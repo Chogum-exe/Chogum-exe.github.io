@@ -1,7 +1,7 @@
 
 function Controller (EventTarget) {
     this.element = EventTarget;
-    this.keydown = []; //Store boolean
+    this.keydown = []; //Store boolean for if a key is pressed
     this.element.addEventListener("keydown", this.handle_keydown.bind(this));
     this.element.addEventListener("keyup", this.handle_keyup.bind(this));
 }

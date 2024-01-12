@@ -19,7 +19,7 @@ window.onload = () => {
     handleResize();
     window.onresize = handleResize;
 
-    const loop = new GameLoop(1000/30, () => {
+    const loop = new GameLoop(1000/60, () => {
         game.update(control.keydown);
 
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);

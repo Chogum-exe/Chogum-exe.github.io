@@ -1,15 +1,13 @@
 'use strict';
-    const random = (min, max) => {
-        return Math.floor(Math.random()*(max-min+1))+min;
-    };
+    const random = (min, max) => Math.floor(Math.random()*(max-min+1))+min;
     
     (() => {
       var can = document.getElementById('can'),
           ctx = can.getContext('2d');
 
         var title = document.getElementById("title");
-        var sc1 = 0;
-        var sc2 = 0;
+        var score1 = 0;
+        var score2 = 0;
 
         var paused = false;
         var fric = 0.7;
@@ -20,47 +18,47 @@
             r: 10,
             velx: 0,
             vely: 0,
-            checkBounce: function(){
+            moveNbounce: function(){
                 if (this.y <= 0 || this.y >= can.height){
                     this.vely *= -1;
                 };
-                if (this.x == this.r+p1.x+p1.w && this.y >= p1.y && this.y <= p1.y+p1.h){
+                if (this.x <= this.r+p1.x+p1.w && this.y >= p1.y && this.y <= p1.y+p1.h){
                     this.velx *= -1;
                     this.vely += p1.vely;
                 }
-                else if (this.x == p2.x-this.r && this.y >= p2.y && this.y <= p2.y+p2.h){
+                else if (this.x >= p2.x-this.r && this.y >= p2.y && this.y <= p2.y+p2.h){
                     this.velx *= -1;
                     this.vely += p2.vely;
                 };
                 if (this.x <= 0){
-                    sc2++;
+                    score2++;
                     this.x = can.width/2;
                     this.y = can.height/2;
-                    let sp = 0;
+                    let speed = 0;
                     if (this.velx < 0){
-                        sp = this.velx-1;
+                        speed = this.velx-1;
                     } else {
-                        sp = this.velx+1;
+                        speed = this.velx+1;
                     };
                     this.vely = 0;
                     this.velx = 0;
-                    addEventListener("keydown", () => { this.velx = sp; }, {once: true})
+                    addEventListener("keydown", () => { this.velx = speed; }, {once: true})
                     p1.y = (can.height-p1.h)/2;
                     p2.y = (can.height-p2.h)/2;
                 }
                 else if (this.x >= can.width){
-                    sc1++;
+                    score1++;
                     this.x = can.width/2;
                     this.y = can.height/2;
-                    let sp = 0;
+                    let speed = 0;
                     if (this.velx < 0){
-                        sp = this.velx-1;
+                        speed = this.velx-1;
                     } else {
-                        sp = this.velx+1;
+                        speed = this.velx+1;
                     };
                     this.vely = 0;
                     this.velx = 0;
-                    addEventListener("keydown", () => { this.velx = sp; }, {once: true})
+                    addEventListener("keydown", () => { this.velx = speed; }, {once: true})
                     p1.y = (can.height-p1.h)/2;
                     p2.y = (can.height-p2.h)/2;
                 };
@@ -68,7 +66,7 @@
                 this.x += this.velx;
             },
             render: function(){
-                this.checkBounce();
+                this.moveNbounce();
                 ctx.beginPath();
                 ctx.fillStyle = "#fff";
                 ctx.arc(this.x, this.y, this.r, 0, 2*Math.PI);
@@ -158,7 +156,7 @@
         };
         window.addEventListener("keydown", listner);
         window.addEventListener("keyup", listner);
-        window.addEventListener("keydown", (e) => { ball.velx = random(1, 2) == 1 ? -5:5; }, {once: true});
+        window.addEventListener("keydown", e => { ball.velx = random(1, 2) == 1 ? -5:5; }, {once: true});
 
         var loop = () => {
             if (!paused){
@@ -173,18 +171,19 @@
                 ball.render();
                 p1.render();
                 p2.render();
-                title.innerHTML = sc1+'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp PONG &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+sc2;
+                title.innerHTML = score1+'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp PONG &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+score2;
                 scrollTo(0, 0);
-                if (sc1 == 5){
+                if (score1 == 5){
                     document.body.innerHTML = '<center><h1 style="color: white;">Player One Wins</h1><h1 style="color: white;">Player One Wins</h1><h1 style="color: white;">Player One Wins</h1><h1 style="color: white;">Player One Wins</h1><h1 style="color: white;">Player One Wins</h1><br/><style>body { background-color: black; }</style></center>';
-                    clearInterval(timer);
+                    cancelAnimationFrame(timer);
                 }
-                else if (sc2 == 5){
+                else if (score2 == 5){
                     document.body.innerHTML = '<center><h1 style="color: white;">Player Two Wins</h1><h1 style="color: white;">Player Two Wins</h1><h1 style="color: white;">Player Two Wins</h1><h1 style="color: white;">Player Two Wins</h1><h1 style="color: white;">Player Two Wins</h1><br/><style>body { background-color: black; }</style></center>';
-                    clearInterval(timer);
+                    cancelAnimationFrame(timer);
                 };
             };
+            timer = requestAnimationFrame(loop);
         };
-        var timer = setInterval(loop, 40);
+        var timer = requestAnimationFrame(loop);
 
     })()
